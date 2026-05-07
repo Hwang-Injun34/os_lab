@@ -1,27 +1,29 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
+#include <sys/types.h>
 
 int main(int argc, char *argv[]){
-    printf("hello word(pid:%d)\n", (int)getpid());
+    printf("-- hello -- (PID: %d)\n", getpid());
 
     pid_t pid = fork();
 
     if(pid < 0){
-        fprintf(stderr, "fork failed\n");
-        exit(1);
+        perror("fork error");
+        return 1;
     }
     else if(pid == 0){
-        printf("--Child Process--\n");
-        printf("Child PID: %d\n", (int)getpid());
-        printf("Parent PID: %d\n", (int)getppid());
+        printf("-- [자식] --\n");
+        printf("내 PID: %d\n", getpid());
+        printf("내 부모 PID: %d\n", getppid());
+        printf("fork 리턴값: %d\n", pid);
+        sleep(30);
     }
     else {
-        printf("--Parent Process--\n");
-        printf("Parent PID: %d\n", (int)getpid());
-        printf("Child PID: %d\n", pid);    
+        printf("-- [부모] --\n");
+        printf("내 PID: %d\n", getpid());
+        printf("내 자식 PID: %d\n", pid);    
+        printf("fork 리턴값: %d\n", pid);
+        sleep(30);
     }
-
-
     return 0;
 }

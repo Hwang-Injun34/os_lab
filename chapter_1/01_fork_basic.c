@@ -1,12 +1,12 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 
 int main(int argc, char *argv[]){
-    printf("Before fork\n");
+    printf(" -- Start -- (PID: %d)\n", getpid());
+    
+    pid_t pid = fork();
+    printf(" -- Hello --(PID: %d)\n", getpid());
 
-    fork();
-    printf("After fork\n");
-
+    sleep(10);
     return 0;
 }
