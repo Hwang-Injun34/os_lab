@@ -58,7 +58,7 @@ func handleConn(conn net.Conn){
 
 func clientWriter(conn net.Conn, ch <- chan string){
 	for msg := range ch {
-		fmt.Println(conn, msg)
+		fmt.Fprintln(conn, msg)
 	}
 }
 
